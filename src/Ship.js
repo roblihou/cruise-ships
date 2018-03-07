@@ -6,6 +6,7 @@ function Ship(itinerary) {
 
 function Port(portName) {
   this.portName = portName;
+  this.ships = [];
 }
 
 function Itinerary(ports) {
@@ -18,6 +19,12 @@ Ship.prototype = {
   },
   dock: function(currentPort){
     this.currentPort = currentPort;
+  }
+}
+
+Port.prototype = {
+  addShip: function(ship) {
+    this.ships.push(ship);
   }
 }
 

@@ -37,6 +37,17 @@ it('port has name', () => {
   expect(port.portName).toBe('Dover');
 });
 
+it('port has ships', () => {
+  const port = new Port('Dover');
+  expect(port.ships).toEqual([]);
+});
+
+it('port can add ships', () => {
+  const port = new Port('Dover');
+  port.addShip('Rob');
+  expect(port.ships).toContain('Rob');
+});
+
 it('is docked at a port', () => {
   const port = new Port('Dover');
   const itinerary = new Itinerary([port]);
