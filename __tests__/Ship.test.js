@@ -1,23 +1,27 @@
 /* globals describe it expect */
 
-const { Ship, Port } = require('../src/Ship.js');
+const { Ship, Port, Itinerary } = require('../src/Ship.js');
 
 describe('Ship', () => {
   it('can be instantiated', () => {
-    expect(new Ship()).toBeInstanceOf(Object);
+    const port = new Port('Dover');
+    const itinerary = new Itinerary([port]);
+    const ship = new Ship(itinerary);
+    expect(ship).toBeInstanceOf(Object);
   });
 });
 
 it('has a starting port', () => {
   const port = new Port('Dover');
-  const ship = new Ship(port);
-
-  expect(ship.startingPort).toBe(port);
+  const itinerary = new Itinerary([port]);
+  const ship = new Ship(itinerary);
+  expect(ship.currentPort).toBe(port);
 });
 
 it('has set sail', () => {
   const port = new Port('Dover');
-  const ship = new Ship(port);
+  const itinerary = new Itinerary([port]);
+  const ship = new Ship(itinerary);
   ship.setSail();
   expect(ship.startingPort).toBeFalsy();
 });
@@ -35,10 +39,24 @@ it('port has name', () => {
 
 it('is docked at a port', () => {
   const port = new Port('Dover');
-  const ship = new Ship(port);
+  const itinerary = new Itinerary([port]);
+  const ship = new Ship(itinerary);
 
   const calais = new Port('Calais');
   ship.dock(calais);
   expect(ship.currentPort).toBe(calais);
 });
+
+it('Creates an itinerary object', () => {
+  const itinerary = new Itinerary();
+  expect(itinerary).toBeInstanceOf(Object);
+});
+
+it('checks whether an itinerary has a ports property', () => {
+  const dover = new Port('Dover');
+  const calais = new Port('Calais');
+  const itinerary = new Itinerary([dover, calais]);
+  expect(itinerary.ports).toEqual([dover, calais]);
+});
+
 
