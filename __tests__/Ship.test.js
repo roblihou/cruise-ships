@@ -11,7 +11,8 @@ describe('Ship', () => {
     let port;
 
     beforeEach(() => {
-      port = new Port('Dover');
+      //  port = new Port('Dover');
+      port = { portName: 'Dover', ships: [], removeShip: jest.fn(), addShip: jest.fn() };
       //  port = jest.fn();
       const itinerary = new Itinerary([port]);
       ship = new Ship(itinerary);
@@ -31,12 +32,13 @@ describe('Ship', () => {
       expect(ship.currentPort).toBe(port);
     });
 
-    it('has set sail', () => {
+    it('can set sail', () => {
       //  const port = new Port('Dover');
       // const itinerary = new Itinerary([port]);
       // const ship = new Ship(itinerary);
       ship.setSail();
-      expect(ship.currentPort).toBeFalsy();
+      expect(port.removeShip).toHaveBeenCalledWith(ship);
+      // expect(ship.currentPort).toBeFalsy();
     });
 
     it('is docked at a port', () => {
@@ -52,7 +54,8 @@ describe('Ship', () => {
       //  const port = new Port('Dover');
       // const itinerary = new Itinerary([port]);
       // const ship = new Ship(itinerary);
-      expect(ship.currentPort.ships).toContain(ship);
+      // expect(ship.currentPort.ships).toContain(ship);
+      expect(port.addShip).toHaveBeenCalledWith(ship);
     });
 
     it('gets removed from port when it sets sail', () => {
