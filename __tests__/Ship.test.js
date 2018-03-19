@@ -12,6 +12,7 @@ describe('Ship', () => {
 
     beforeEach(() => {
       port = new Port('Dover');
+      //  port = jest.fn();
       const itinerary = new Itinerary([port]);
       ship = new Ship(itinerary);
     });
