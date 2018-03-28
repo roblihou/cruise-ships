@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+</head>
+<body>
+    <div id=userInput>
+        <form action="">
+            <button id="sailbutton">Set Sail!</button>
+        </form>
+    </div>
+    <div id="viewport">
+        <div id="ports"></div>
+        <div id="ship"></div>
+    </div>
+</body>
+</html>
+<script src="src/Controller.js"></script>
+<script src="src/Itinerary.js"></script>
+<script src="src/Port.js"></script>
+<script src="src/Ship.js"></script>
+<script>
+    const controller = new Controller();
+    const dover = new Port('Dover');
+    const calais = new Port('Calais');
+    const ningbo = new Port('Ningbo');
+    const itinerary = new Itinerary([dover, calais, ningbo]);
+    controller.renderPorts(itinerary.ports);
+    const ship = new Ship(itinerary);
+    ship.dock(calais);
+    controller.renderShip(ship);
+</script>

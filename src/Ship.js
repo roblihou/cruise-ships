@@ -1,19 +1,27 @@
-function Ship(itinerary) {
-  const currentPort = itinerary.ports[0];
-  this.currentPort = currentPort;
-  this.itinerary = itinerary;
-  this.currentPort.addShip(this);
-}
+/* globals window */
 
-Ship.prototype = {
-  setSail: function setSail() {
-    this.currentPort.removeShip(this);
-    this.currentPort = false;
-  },
-  dock: function dock(currentPort) {
+(function exportShip() {
+  function Ship(itinerary) {
+    const currentPort = itinerary.ports[0];
     this.currentPort = currentPort;
-    currentPort.addShip(this);
-  },
-};
+    this.itinerary = itinerary;
+    this.currentPort.addShip(this);
+  }
 
-module.exports = { Ship };
+  Ship.prototype = {
+    setSail: function setSail() {
+      this.currentPort.removeShip(this);
+      this.currentPort = false;
+    },
+    dock: function dock(currentPort) {
+      this.currentPort = currentPort;
+      currentPort.addShip(this);
+    },
+  };
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { Ship };
+  } else {
+    window.Ship = Ship;
+  }
+}());
