@@ -10,9 +10,7 @@
 </head>
 <body>
     <div id=userInput>
-        <form action="">
-            <button id="sailbutton">Set Sail!</button>
-        </form>
+        <button id="sailbutton">Set Sail!</button>
     </div>
     <div id="viewport">
         <div id="ports"></div>
@@ -25,13 +23,12 @@
 <script src="src/Port.js"></script>
 <script src="src/Ship.js"></script>
 <script>
-    const controller = new Controller();
     const dover = new Port('Dover');
     const calais = new Port('Calais');
     const ningbo = new Port('Ningbo');
     const itinerary = new Itinerary([dover, calais, ningbo]);
-    controller.renderPorts(itinerary.ports);
     const ship = new Ship(itinerary);
-    ship.dock(calais);
-    controller.renderShip(ship);
+    const controller = new Controller(ship);
+    controller.renderPorts(itinerary.ports);
+    controller.renderShip();
 </script>
